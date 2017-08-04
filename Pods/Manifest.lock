@@ -1,0 +1,45 @@
+PODS:
+  - Alamofire (4.5.0)
+  - BSErrorMessageView (1.1)
+  - IQKeyboardManagerSwift (4.0.11)
+  - KVNProgress (2.3.1)
+  - PopupDialog (0.5.4)
+  - Shimmer (1.0.2)
+  - SwiftValidator (4.0.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.5.0)
+  - BSErrorMessageView (from `https://github.com/BenjaminSarkisyan/BSErrorMessageView.git`)
+  - IQKeyboardManagerSwift (~> 4.0.6)
+  - KVNProgress (~> 2.3.1)
+  - PopupDialog (~> 0.5.4)
+  - Shimmer (~> 1.0.2)
+  - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, branch `master`)
+
+EXTERNAL SOURCES:
+  BSErrorMessageView:
+    :git: https://github.com/BenjaminSarkisyan/BSErrorMessageView.git
+  SwiftValidator:
+    :branch: master
+    :git: https://github.com/jpotts18/SwiftValidator.git
+
+CHECKOUT OPTIONS:
+  BSErrorMessageView:
+    :commit: e1523069939ac597f9b7a9c615d718f89c071b49
+    :git: https://github.com/BenjaminSarkisyan/BSErrorMessageView.git
+  SwiftValidator:
+    :commit: 6cff6cac3e02a617f7cf11323e18526a117d5673
+    :git: https://github.com/jpotts18/SwiftValidator.git
+
+SPEC CHECKSUMS:
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  BSErrorMessageView: 67cc7d172995fbc6df602c2b8923f48121ddf7a9
+  IQKeyboardManagerSwift: 10f0a6b8ea2904c8943c0e1a116c99f5b8ad83af
+  KVNProgress: 8167b1f19e2758290c0b6143020ed9dcbb0477a1
+  PopupDialog: 75cf955693590b0cb2fdde00223fb65d99c57247
+  Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
+  SwiftValidator: 25ded5ca1f10c05adf57f6ac82a72d28ac8d91af
+
+PODFILE CHECKSUM: 7db668ba03cf768598fba22ade19a742f7ade9fd
+
+COCOAPODS: 1.3.0
