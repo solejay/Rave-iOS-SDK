@@ -1100,6 +1100,36 @@ extension RavePayController: UITableViewDelegate,UITableViewDataSource{
             return 0
         }
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath:IndexPath) {
+        if(indexPath.section == 0){
+            selectedCard = cardList?[indexPath.row]
+            if (editingStyle == UITableViewCellEditingStyle.delete) {
+                let cards = self.cardList?.filter({ (item) -> Bool in
+                    return item["card_token"] != selectedCard!["card_token"]
+                })
+                UserDefaults.standard.set(cards, forKey: "cards-\(self.email!)")
+                self.cardList?.remove(at: indexPath.row)
+                
+                //checkOutTableView.deleteRows(at: [indexPath], with: .fade)
+                cardSavedTable.reloadData()
+                if (cardList!.count == 0){
+                    UserDefaults.standard.removeObject(forKey: "cards-\(self.email!)")
+                    self.hideCardOvelay()
+                    isCardSaved = false
+                    
+                    determineCardContainerHeight()
+                    
+                }
+            }
+        }
+    }
+
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = cardSavedTable.dequeueReusableCell(withIdentifier: "cardCell")! as UITableViewCell
         cell.accessoryType = .none
