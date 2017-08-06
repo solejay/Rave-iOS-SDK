@@ -24,8 +24,7 @@ class URLHelper: NSObject {
             return (isStaging ? Constants.baseURL(): Constants.liveBaseURL()) + str!
             
         }else{
-            print((isStaging ? Constants.baseURL(): Constants.liveBaseURL()) + Constants.relativeURL()[URLKey]!)
-            return (isStaging ? Constants.baseURL(): Constants.liveBaseURL()) + Constants.relativeURL()[URLKey]!
+        return (isStaging ? Constants.baseURL(): Constants.liveBaseURL()) + Constants.relativeURL()[URLKey]!
         }
     }
     

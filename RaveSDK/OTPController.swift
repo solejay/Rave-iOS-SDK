@@ -95,37 +95,17 @@ class OTPController: UIViewController,UITextFieldDelegate,ValidationDelegate{
     func validateCard(reqbody:[String:String]){
         KVNProgress.show(withStatus: "Processing..")
         RavePayService.validateCardOTP(reqbody, resultCallback: { (result) in
-            print(result ?? "nil")
-            
             if let res =  result{
                 if let data = res ["data"] as? [String:AnyObject]{
-                    print(data)
                     if let tx = data["tx"] as? [String:AnyObject]{
                         if let flwRef = tx["flwRef"] as? String{
                             self.queryTransaction(flwRef: flwRef)
                         }
                     }
                 }
-//                if let status = res["status"] as? String{
-//                    if status == "success"{
-//                        DispatchQueue.main.async {
-//                            KVNProgress.showSuccess(completion: {
-//                                self.delegate?.raveOTP(self, didSucceedPaymentWithResult: res)
-//                                self.dismissView()
-//                            })
-//                        }
-//                    }else{
-//                        DispatchQueue.main.async {
-//                            KVNProgress.dismiss()
-//                            self.delegate?.raveOTP(self, didFailPaymentWithResult: res)
-//                            self.dismissView()
-//                        }
-//                    }
-//                }
             }
             
         }) { (err) in
-            print(err)
             KVNProgress.dismiss()
             showMessageDialog("Error", message: err, image: nil, axis: .horizontal, viewController: self, handler: {
                 
@@ -136,34 +116,16 @@ class OTPController: UIViewController,UITextFieldDelegate,ValidationDelegate{
     func validateAccount(reqbody:[String:String]){
         KVNProgress.show(withStatus: "Processing..")
         RavePayService.validateAccountOTP(reqbody, resultCallback: { (result) in
-            print(result ?? "nil")
             if let res =  result{
                 if let data = res ["data"] as? [String:AnyObject]{
                     if let flwRef = data["flwRef"] as? String{
                         self.queryTransaction(flwRef: flwRef)
                     }
                 }
-
-//                if let status = res["status"] as? String{
-//                    if status == "success"{
-//                        DispatchQueue.main.async {
-//                            KVNProgress.showSuccess(completion: {
-//                                self.delegate?.raveOTP(self, didSucceedPaymentWithResult: res)
-//                                self.dismissView()
-//                            })
-//                        }
-//                    }else{
-//                        DispatchQueue.main.async {
-//                            self.delegate?.raveOTP(self, didFailPaymentWithResult: res)
-//                            KVNProgress.dismiss()
-//                            self.dismissView()
-//                        }
-//                    }
-//                }
             }
             
         }) { (err) in
-            print(err)
+           
             KVNProgress.dismiss()
             showMessageDialog("Error", message: err, image: nil, axis: .horizontal, viewController: self, handler: {
                 
@@ -180,8 +142,7 @@ class OTPController: UIViewController,UITextFieldDelegate,ValidationDelegate{
                     if (status == "success"){
                         DispatchQueue.main.async {
                              KVNProgress.showSuccess(completion: {
-                            
-                                print(result!)
+
                                 let callbackResult = ["status":"success","payload":result!] as [String : Any]
                                 if (self.saveCard){
                                     self.addOrUpdateCardToken(cardNumber: self.cardNumber!, data: result!,withFlwRef: ref)
@@ -201,8 +162,6 @@ class OTPController: UIViewController,UITextFieldDelegate,ValidationDelegate{
                     }
                 }
             }, errorCallback: { (err) in
-                
-                print(err)
                  KVNProgress.dismiss()
                 showMessageDialog("Error", message: err, image: nil, axis: .horizontal, viewController: self, handler: {
                     

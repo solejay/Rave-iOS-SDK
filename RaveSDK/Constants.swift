@@ -39,18 +39,6 @@ class Constants: NSObject {
     
     
     class func headerConstants(_ headerParam:Dictionary<String,String>)->Dictionary<String,String> {
-     
-       /* var defaultsDict:Dictionary<String,String>  =  [
-            "apikey":apiKey,
-            "secret": apiSecret]*/
-      
-        
-//        if(headerParam.isEmpty){
-//            return defaultsDict
-//        }else{
-//            defaultsDict.merge(headerParam)
-//            return defaultsDict
-//        }
         
        return  headerParam
 

@@ -27,7 +27,13 @@
 		78635B321F34D80400FA6134 /* URLHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78635B2D1F34D80400FA6134 /* URLHelper.swift */; };
 		78635B341F34D81000FA6134 /* RavePayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78635B331F34D81000FA6134 /* RavePayService.swift */; };
 		78635B361F34D81900FA6134 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78635B351F34D81900FA6134 /* Bank.swift */; };
-		82EDBDFE2CBCA6B09852D41F /* Pods_RaveSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0AA830949D2ACADA26C5A6 /* Pods_RaveSDK.framework */; };
+		78635C571F3721F400FA6134 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78635C501F3721F400FA6134 /* Alamofire.framework */; };
+		78635C581F3721F400FA6134 /* BSErrorMessageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78635C511F3721F400FA6134 /* BSErrorMessageView.framework */; };
+		78635C591F3721F400FA6134 /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78635C521F3721F400FA6134 /* IQKeyboardManagerSwift.framework */; };
+		78635C5A1F3721F400FA6134 /* KVNProgress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78635C531F3721F400FA6134 /* KVNProgress.framework */; };
+		78635C5B1F3721F400FA6134 /* PopupDialog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78635C541F3721F400FA6134 /* PopupDialog.framework */; };
+		78635C5C1F3721F400FA6134 /* Shimmer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78635C551F3721F400FA6134 /* Shimmer.framework */; };
+		78635C5D1F3721F400FA6134 /* SwiftValidator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78635C561F3721F400FA6134 /* SwiftValidator.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +72,13 @@
 		78635B2D1F34D80400FA6134 /* URLHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLHelper.swift; sourceTree = "<group>"; };
 		78635B331F34D81000FA6134 /* RavePayService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RavePayService.swift; sourceTree = "<group>"; };
 		78635B351F34D81900FA6134 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		78635C501F3721F400FA6134 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../Library/Developer/Xcode/DerivedData/RaveExample-hdnvrodavmwifeayauvyxveevyxd/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
+		78635C511F3721F400FA6134 /* BSErrorMessageView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BSErrorMessageView.framework; path = "/Users/olusegunsolaja/Documents/Projects/RaveExample/Pods/../build/Debug-iphoneos/BSErrorMessageView/BSErrorMessageView.framework"; sourceTree = "<absolute>"; };
+		78635C521F3721F400FA6134 /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = "../../../../Library/Developer/Xcode/DerivedData/RaveExample-hdnvrodavmwifeayauvyxveevyxd/Build/Products/Debug-iphonesimulator/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"; sourceTree = "<group>"; };
+		78635C531F3721F400FA6134 /* KVNProgress.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KVNProgress.framework; path = "/Users/olusegunsolaja/Documents/Projects/RaveExample/Pods/../build/Debug-iphoneos/KVNProgress/KVNProgress.framework"; sourceTree = "<absolute>"; };
+		78635C541F3721F400FA6134 /* PopupDialog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PopupDialog.framework; path = "../../../../Library/Developer/Xcode/DerivedData/RaveExample-hdnvrodavmwifeayauvyxveevyxd/Build/Products/Debug-iphonesimulator/PopupDialog/PopupDialog.framework"; sourceTree = "<group>"; };
+		78635C551F3721F400FA6134 /* Shimmer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Shimmer.framework; path = "/Users/olusegunsolaja/Documents/Projects/RaveExample/Pods/../build/Debug-iphoneos/Shimmer/Shimmer.framework"; sourceTree = "<absolute>"; };
+		78635C561F3721F400FA6134 /* SwiftValidator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftValidator.framework; path = "../../../../Library/Developer/Xcode/DerivedData/RaveExample-hdnvrodavmwifeayauvyxveevyxd/Build/Products/Debug-iphonesimulator/SwiftValidator/SwiftValidator.framework"; sourceTree = "<group>"; };
 		78C4547BFD6E9296BC4E8F0C /* Pods-RaveSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RaveSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RaveSDKTests/Pods-RaveSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		9F0AA830949D2ACADA26C5A6 /* Pods_RaveSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RaveSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B07A79FDCF26C930491E0D74 /* Pods-RaveSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RaveSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-RaveSDK/Pods-RaveSDK.release.xcconfig"; sourceTree = "<group>"; };
@@ -76,7 +89,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82EDBDFE2CBCA6B09852D41F /* Pods_RaveSDK.framework in Frameworks */,
+				78635C571F3721F400FA6134 /* Alamofire.framework in Frameworks */,
+				78635C581F3721F400FA6134 /* BSErrorMessageView.framework in Frameworks */,
+				78635C591F3721F400FA6134 /* IQKeyboardManagerSwift.framework in Frameworks */,
+				78635C5A1F3721F400FA6134 /* KVNProgress.framework in Frameworks */,
+				78635C5B1F3721F400FA6134 /* PopupDialog.framework in Frameworks */,
+				78635C5C1F3721F400FA6134 /* Shimmer.framework in Frameworks */,
+				78635C5D1F3721F400FA6134 /* SwiftValidator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +243,13 @@
 		D4915CF10A92616CE8E94794 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				78635C501F3721F400FA6134 /* Alamofire.framework */,
+				78635C511F3721F400FA6134 /* BSErrorMessageView.framework */,
+				78635C521F3721F400FA6134 /* IQKeyboardManagerSwift.framework */,
+				78635C531F3721F400FA6134 /* KVNProgress.framework */,
+				78635C541F3721F400FA6134 /* PopupDialog.framework */,
+				78635C551F3721F400FA6134 /* Shimmer.framework */,
+				78635C561F3721F400FA6134 /* SwiftValidator.framework */,
 				9F0AA830949D2ACADA26C5A6 /* Pods_RaveSDK.framework */,
 				3D35A8FB7D12FFFE2F231EA6 /* Pods_RaveSDKTests.framework */,
 			);

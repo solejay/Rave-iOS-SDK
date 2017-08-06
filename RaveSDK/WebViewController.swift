@@ -25,12 +25,6 @@ class WebViewController: UIViewController,WKNavigationDelegate,WKUIDelegate {
         return web
     }()
     
-//    let blurView:UIVisualEffectView = {
-//        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-//        let visualEffect = UIVisualEffectView(effect: blurEffect)
-//        visualEffect.translatesAutoresizingMaskIntoConstraints = false
-//        return visualEffect
-//    }()
     
     let loadingView:UIView = {
         let load = UIView()
@@ -56,7 +50,7 @@ class WebViewController: UIViewController,WKNavigationDelegate,WKUIDelegate {
         super.viewDidLoad()
         self.view.addSubview(webView)
         self.view.addSubview(loadingView)
-        //loadingView.addSubview(blurView)
+    
         loadingView.addSubview(shimmerView)
         setupConstraints()
         
@@ -68,7 +62,7 @@ class WebViewController: UIViewController,WKNavigationDelegate,WKUIDelegate {
         shimmerView.contentView = loadingLabel
         
         let urlStr : NSString = url!.addingPercentEscapes(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))! as NSString
-        //let urlStr:Ns  = url!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        
         let _URL : NSURL = NSURL(string: urlStr as! String)!
         let request = URLRequest(url: _URL as URL)
         webView.load(request)
@@ -98,11 +92,7 @@ class WebViewController: UIViewController,WKNavigationDelegate,WKUIDelegate {
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-       // let urlStr : NSString = url!.addingPercentEscapes(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))! as NSString
-        print("doneLoading")
-        print(webView.url!.absoluteString)
             if (webView.url!.absoluteString.contains("/complete") || webView.url!.absoluteString.contains("submitting_mock_form")){
-                print("success page")
                 self.queryTransaction()
             }else{
                 loadingView.isHidden = true
@@ -122,7 +112,6 @@ class WebViewController: UIViewController,WKNavigationDelegate,WKUIDelegate {
                         DispatchQueue.main.async {
                             self.loadingView.isHidden = true
                             self.shimmerView.isShimmering = false
-                            print(result!)
                             let callbackResult = ["status":"success","payload":result!] as [String : Any]
                             if (self.saveCard){
                                 self.addOrUpdateCardToken(cardNumber: self.cardNumber!, data: result!,withFlwRef:ref )
@@ -145,7 +134,6 @@ class WebViewController: UIViewController,WKNavigationDelegate,WKUIDelegate {
                 }
             }, errorCallback: { (err) in
                 
-                print(err)
             })
         }
     }
@@ -188,10 +176,6 @@ class WebViewController: UIViewController,WKNavigationDelegate,WKUIDelegate {
         shimmerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         shimmerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-//        blurView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-//        blurView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-//        blurView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-//        blurView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         loadingView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         loadingView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
