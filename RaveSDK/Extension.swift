@@ -9,6 +9,7 @@
 import UIKit
 import PopupDialog
 import CommonCrypto
+//import ifaddrs
 
 
 func MD5(string: String) -> Data? {
@@ -38,7 +39,7 @@ func showMessageDialog (_ title:String, message:String , image:UIImage?, axis:UI
     _ = viewController.present(popUp, animated: true)
 }
 
- func getEncryptionKey(_ secretKey:String)->String {
+func getEncryptionKey(_ secretKey:String)->String {
     let md5Data = MD5(string:secretKey)
     let md5Hex =  md5Data!.map { String(format: "%02hhx", $0) }.joined()
     
@@ -60,8 +61,36 @@ func showMessageDialog (_ title:String, message:String , image:UIImage?, axis:UI
 }
 
 func getIFAddresses() -> [String] {
-
-    return ["127.0.0.1"]
+    //    var addresses = [String]()
+    //
+    //    // Get list of all interfaces on the local machine:
+    //    var ifaddr : UnsafeMutablePointer<ifaddrs>?
+    //    guard getifaddrs(&ifaddr) == 0 else { return [] }
+    //    guard let firstAddr = ifaddr else { return [] }
+    //
+    //    // For each interface ...
+    //    for ptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
+    //        let flags = Int32(ptr.pointee.ifa_flags)
+    //        let addr = ptr.pointee.ifa_addr.pointee
+    //
+    //        // Check for running IPv4, IPv6 interfaces. Skip the loopback interface.
+    //        if (flags & (IFF_UP|IFF_RUNNING|IFF_LOOPBACK)) == (IFF_UP|IFF_RUNNING) {
+    //            if addr.sa_family == UInt8(AF_INET) || addr.sa_family == UInt8(AF_INET6) {
+    //
+    //                // Convert interface address to a human readable string:
+    //                var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+    //                if (getnameinfo(ptr.pointee.ifa_addr, socklen_t(addr.sa_len), &hostname, socklen_t(hostname.count),
+    //                                nil, socklen_t(0), NI_NUMERICHOST) == 0) {
+    //                    let address = String(cString: hostname)
+    //                    addresses.append(address)
+    //                }
+    //            }
+    //        }
+    //    }
+    //
+    //    freeifaddrs(ifaddr)
+    //    return addresses
+    return["127.0.0.1"]
 }
 
 let themeColor:UIColor = UIColor(hex: "#382E4B")
@@ -71,6 +100,7 @@ func styleTextField(_ textField:UITextField, leftView:UIView? = nil){
     textField.layer.borderWidth = 1
     textField.layer.borderColor = UIColor(hex: "#E1E2E2").cgColor
     textField.layer.cornerRadius = textField.frame.height / 2
+    //textField.layer.cornerRadius = 4
     if let v = leftView{
         textField.leftView = v
         textField.leftViewMode = .always
@@ -93,21 +123,21 @@ extension String{
             return formatter.string(from: NSNumber(value: val))!
         }
     }
- 
+    
     func index(of target: String) -> Int? {
-            if let range = self.range(of: target) {
-                return characters.distance(from: startIndex, to: range.lowerBound)
-            } else {
-                return nil
-            }
+        if let range = self.range(of: target) {
+            return characters.distance(from: startIndex, to: range.lowerBound)
+        } else {
+            return nil
+        }
     }
-        
+    
     func lastIndex(of target: String) -> Int? {
-            if let range = self.range(of: target, options: .backwards) {
-                return characters.distance(from: startIndex, to: range.lowerBound)
-            } else {
-                return nil
-            }
+        if let range = self.range(of: target, options: .backwards) {
+            return characters.distance(from: startIndex, to: range.lowerBound)
+        } else {
+            return nil
+        }
     }
     func toCountryCurrency(code:String) -> String{
         var str:String = ""
@@ -122,9 +152,11 @@ extension String{
             str = self.toCurrency(2,locale:"kam_KE")
         case "GHS":
             str = self.toCurrency(2,locale:"ak_GH")
+        case "ZAR":
+            str = self.toCurrency(2, locale: "en_ZA")
         default:
             str = self.toCurrency(2)
-           
+            
         }
         return str
     }
@@ -134,17 +166,17 @@ extension String{
 public extension Dictionary{
     func jsonStringify()-> String {
         var str = ""
-            do
+        do
+        {
+            let data = try JSONSerialization.data(withJSONObject: self, options: JSONSerialization.WritingOptions(rawValue: 0))
+            if let string = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
             {
-                let data = try JSONSerialization.data(withJSONObject: self, options: JSONSerialization.WritingOptions(rawValue: 0))
-                if let string = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
-                {
-                     str = string as String
-                }
+                str = string as String
             }
-            catch
-            {
-            }
+        }
+        catch
+        {
+        }
         
         return str
     }

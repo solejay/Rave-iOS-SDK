@@ -25,6 +25,12 @@ class WebViewController: UIViewController,WKNavigationDelegate,WKUIDelegate {
         return web
     }()
     
+    //    let blurView:UIVisualEffectView = {
+    //        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+    //        let visualEffect = UIVisualEffectView(effect: blurEffect)
+    //        visualEffect.translatesAutoresizingMaskIntoConstraints = false
+    //        return visualEffect
+    //    }()
     
     let loadingView:UIView = {
         let load = UIView()
@@ -50,7 +56,7 @@ class WebViewController: UIViewController,WKNavigationDelegate,WKUIDelegate {
         super.viewDidLoad()
         self.view.addSubview(webView)
         self.view.addSubview(loadingView)
-    
+        //loadingView.addSubview(blurView)
         loadingView.addSubview(shimmerView)
         setupConstraints()
         
@@ -62,7 +68,7 @@ class WebViewController: UIViewController,WKNavigationDelegate,WKUIDelegate {
         shimmerView.contentView = loadingLabel
         
         let urlStr : NSString = url!.addingPercentEscapes(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))! as NSString
-        
+        //let urlStr:Ns  = url!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         let _URL : NSURL = NSURL(string: urlStr as! String)!
         let request = URLRequest(url: _URL as URL)
         webView.load(request)
@@ -81,7 +87,7 @@ class WebViewController: UIViewController,WKNavigationDelegate,WKUIDelegate {
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
     }
     
-
+    
     
     func popView(){
         _ = self.navigationController?.dismiss(animated: true, completion: nil)
@@ -92,14 +98,18 @@ class WebViewController: UIViewController,WKNavigationDelegate,WKUIDelegate {
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            if (webView.url!.absoluteString.contains("/complete") || webView.url!.absoluteString.contains("submitting_mock_form")){
-                self.queryTransaction()
-            }else{
-                loadingView.isHidden = true
-                shimmerView.isShimmering = false
- 
-            }
-  
+        // let urlStr : NSString = url!.addingPercentEscapes(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))! as NSString
+        print("doneLoading")
+        print(webView.url!.absoluteString)
+        if (webView.url!.absoluteString.contains("/complete") || webView.url!.absoluteString.contains("submitting_mock_form")){
+            print("success page")
+            self.queryTransaction()
+        }else{
+            loadingView.isHidden = true
+            shimmerView.isShimmering = false
+            
+        }
+        
     }
     
     func queryTransaction(){
@@ -112,80 +122,86 @@ class WebViewController: UIViewController,WKNavigationDelegate,WKUIDelegate {
                         DispatchQueue.main.async {
                             self.loadingView.isHidden = true
                             self.shimmerView.isShimmering = false
+                            print(result!)
                             let callbackResult = ["status":"success","payload":result!] as [String : Any]
                             if (self.saveCard){
                                 self.addOrUpdateCardToken(cardNumber: self.cardNumber!, data: result!,withFlwRef:ref )
                             }
                             self.delegate?.ravePay(self, didSucceedPaymentWithResult: callbackResult as [String : AnyObject])
                             self.navigationController?.popViewController(animated: true)
-
+                            
                         }
                     }else{
                         DispatchQueue.main.async {
                             self.loadingView.isHidden = true
                             self.shimmerView.isShimmering = false
-
+                            
                             let callbackResult = ["status":"error","payload":result!] as [String : Any]
                             self.delegate?.ravePay(self, didFailPaymentWithResult: callbackResult as [String : AnyObject])
                             self.navigationController?.popViewController(animated: true)
-
-                     }
+                            
+                        }
                     }
                 }
             }, errorCallback: { (err) in
                 
+                print(err)
             })
         }
     }
     private func addOrUpdateCardToken(cardNumber:String,data:[String:AnyObject], withFlwRef ref:String){
-      if let _data = data["data"] as? [String:AnyObject]{
-        if let card = _data["card"] as? [String:AnyObject]{
-            if let cards = card["card_tokens"] as? [[String:AnyObject]]{
-                let _cardToken = cards.last!
-                if let token = _cardToken["embedtoken"] as? String{
-                    let first6 = cardNumber.substring(to: cardNumber.index(cardNumber.startIndex, offsetBy: 6))
-                    let last4 = cardNumber.substring(from: cardNumber.index(cardNumber.endIndex, offsetBy: -4))
-                    let cardDetails = ["card_token":token,"first6":first6,"last4":last4,"flwRef":ref]
-                    if let cards  = UserDefaults.standard.object(forKey: "cards-\(email!)") as? [[String:String]]{
-                        var theCards = cards
-                        theCards = cards.filter({ (item) -> Bool in
-                            let _first6 = item["first6"]!
-                            return _first6 != first6
-                        })
-                        theCards.append(cardDetails)
-                        UserDefaults.standard.set(theCards, forKey: "cards-\(email!)")
-                        
-                    }else{
-                        UserDefaults.standard.set([cardDetails], forKey: "cards-\(email!)")
-                        
+        if let _data = data["data"] as? [String:AnyObject]{
+            if let card = _data["card"] as? [String:AnyObject]{
+                if let cards = card["card_tokens"] as? [[String:AnyObject]]{
+                    let _cardToken = cards.last!
+                    if let token = _cardToken["embedtoken"] as? String{
+                        let first6 = cardNumber.substring(to: cardNumber.index(cardNumber.startIndex, offsetBy: 6))
+                        let last4 = cardNumber.substring(from: cardNumber.index(cardNumber.endIndex, offsetBy: -4))
+                        let cardDetails = ["card_token":token,"first6":first6,"last4":last4,"flwRef":ref]
+                        if let cards  = UserDefaults.standard.object(forKey: "cards-\(email!)") as? [[String:String]]{
+                            var theCards = cards
+                            theCards = cards.filter({ (item) -> Bool in
+                                let _first6 = item["first6"]!
+                                return _first6 != first6
+                            })
+                            theCards.append(cardDetails)
+                            UserDefaults.standard.set(theCards, forKey: "cards-\(email!)")
+                            
+                        }else{
+                            UserDefaults.standard.set([cardDetails], forKey: "cards-\(email!)")
+                            
+                        }
                     }
                 }
             }
         }
-        }
     }
     
     func setupConstraints(){
-         webView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-         webView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-         webView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        webView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        webView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        webView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         shimmerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         shimmerView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         shimmerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         shimmerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
+        //        blurView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        //        blurView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        //        blurView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        //        blurView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         loadingView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         loadingView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         loadingView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-
+    
 }
