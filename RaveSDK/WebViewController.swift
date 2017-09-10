@@ -187,11 +187,7 @@ class WebViewController: UIViewController,WKNavigationDelegate,WKUIDelegate {
         shimmerView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         shimmerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         shimmerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
-        //        blurView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        //        blurView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        //        blurView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        //        blurView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+
         
         loadingView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         loadingView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true

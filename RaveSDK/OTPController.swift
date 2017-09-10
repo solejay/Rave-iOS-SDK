@@ -179,8 +179,6 @@ class OTPController: UIViewController,UITextFieldDelegate,ValidationDelegate{
         // turn the fields to red
         for (field, error) in errors {
             if let field = field as? UITextField {
-                //  field.layer.borderColor = UIColor(hex: "#FB4F3B").cgColor
-                // field.layer.borderWidth = 1.0
                 field.bs_setupErrorMessageView(withMessage: error.errorMessage)
                 field.bs_showError()
             }

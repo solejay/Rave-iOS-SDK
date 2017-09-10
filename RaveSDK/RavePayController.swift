@@ -297,22 +297,7 @@ class RavePayController: UIViewController,RavePayWebControllerDelegate,OTPContro
     }
     
     private func setPayButtonTitle(code:String, button:UIButton){
-        //        switch code {
-        //        case "NGN":
-        //             button.setTitle("PAY \(amount!.toCurrency(0))", for: .normal)
-        //        case "USD":
-        //            button.setTitle("PAY \(amount!.toCurrency(0,locale:"en_US"))", for: .normal)
-        //        case "GBP":
-        //             button.setTitle("PAY \(amount!.toCurrency(0,locale:"en_GB"))", for: .normal)
-        //        case "KES":
-        //             button.setTitle("PAY \(amount!.toCurrency(0,locale:"kam_KE"))", for: .normal)
-        //        case "GHS":
-        //            button.setTitle("PAY \(amount!.toCurrency(0,locale:"ak_GH"))", for: .normal)
-        //        default:
-        //            button.setTitle("PAY \(amount!.toCurrency(0))", for: .normal)
-        //        }
-        
-        button.setTitle("PAY", for: .normal)
+              button.setTitle("PAY", for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -333,10 +318,6 @@ class RavePayController: UIViewController,RavePayWebControllerDelegate,OTPContro
     }
     func doneButtonPressed(){
         self.hideCardOvelay()
-        //        if let token  = selectedCard?["card_token"]{
-        //            KVNProgress.show(withStatus: "Processing...")
-        //           self.doPayWithCardToken(token: token)
-        //        }
         if let ref  = selectedCard?["flwRef"]{
             KVNProgress.show(withStatus: "Processing...")
             self.queryTransaction(flwRef: ref)
